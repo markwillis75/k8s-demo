@@ -4,36 +4,38 @@ A very simple k8s demo based off the content at https://dev.to/techworld_with_na
 The cluster is comprised of:
 - Two pods  
   - one running a mongoDB instance
-  - one running a simple nodeJs webapp
+  - one running a simple Node.js webapp
 - ConfigMap
 - SecretMap
 
+&nbsp;
 
 # Prerequisites
 - Docker
 - Minikube 
 
+&nbsp;
+
 # Steps
 ## Standup
-```
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```bash
+./start.sh
 
-minikube start
-kubectl apply -f mongo-config.yaml
-kubectl apply -f mongo-secret.yaml
-kubectl apply -f mongo.yaml
-kubectl apply -f webapp.yaml
-kubectl port-forward service/webapp-service 8080:3000
+# Starts minikube
+# Creates the configmap and secret store 
+# Brings up the mongo pod and webapp pod
+# Forwards port 8080 to the service port (3000) of the webapp pod
 ```
+
 
 The webapp is now available at http://localhost:8080
 
 ## Teardown
-```
-kubectl delete -f webapp.yaml
-kubectl delete -f mongo.yaml
-kubectl delete -f mongo-secret.yaml
-kubectl delete -f mongo-config.yaml
-minikube stop
+```bash
+./stop.sh
+
+# deletes pods
+# deletes configmap
+# deletes secret store
+# stops minikube
 ```
