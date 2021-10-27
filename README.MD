@@ -24,17 +24,11 @@ kubectl apply -f mongo-config.yaml
 kubectl apply -f mongo-secret.yaml
 kubectl apply -f mongo.yaml
 kubectl apply -f webapp.yaml
-minikube service webapp-service
+kubectl port-forward service/webapp-service 8080:3000
 ```
 
-The webapp is now available at the address listed by minikube
-```
-|-----------|----------------|-------------|------------------------------|
-| NAMESPACE |      NAME      | TARGET PORT |            URL               |
-|-----------|----------------|-------------|------------------------------|
-| default   | webapp-service |        3000 | http://xxx.xxx.xxx.xxx:30100 |
-|-----------|----------------|-------------|------------------------------|
-```
+The webapp is now available at http://localhost:8080
+
 ## Teardown
 ```
 kubectl delete -f webapp.yaml
